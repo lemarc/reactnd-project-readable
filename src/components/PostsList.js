@@ -14,11 +14,19 @@ class PostsList extends Component {
 			this.props.getPosts()
 		}
 	}
+	
+	// Need to send post request on category change
+	componentWillReceiveProps(nextProps) {
+		const nextCategory = nextProps.match.params.category
+		if ( nextCategory !== this.props.match.params.category) {
+			this.props.getCategoryPosts(nextCategory)
+		}
+	}
 
 	render() {
 		console.log(this.props)
 		const currentCategory = this.props.match.params.category
-		const { categories } = this.props 
+		const { categories, posts } = this.props 
 		return (
 			<div>
 				<div>
@@ -26,8 +34,13 @@ class PostsList extends Component {
 					{categories.map( (category,i) => (
 						<Link to={`/${category.path}`} key={i} style={{padding: '20px', background: currentCategory === category.path ? '#888888' : 'none'}}>
 							{category.name}
-						</Link>))}
+						</Link>
+					))}
+					
 				</div>
+				{posts.map( (post, i) => (
+					<div key={i}>{post.title}</div>
+				))}
 			</div>
 		)
 	}

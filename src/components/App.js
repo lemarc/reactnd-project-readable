@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCategories } from '../actions'
 
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 
 import PostsList from './PostsList'
 
@@ -32,7 +32,7 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App))
