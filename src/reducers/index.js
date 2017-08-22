@@ -4,7 +4,7 @@ import {
 	RECEIVE_POSTS,
 } from '../actions'
 
-function categories ( state = {}, action ) {
+function categories ( state = {categories:[]}, action ) {
 	switch ( action.type ) {
 		case RECEIVE_CATEGORIES :
 			const { categories } = action
@@ -17,7 +17,7 @@ function categories ( state = {}, action ) {
 	}
 }
 
-function posts ( state = {}, action) {
+function posts ( state = {posts:[]}, action) {
 	//const { day, recipe, meal } = action
 
 	switch ( action.type ) {
