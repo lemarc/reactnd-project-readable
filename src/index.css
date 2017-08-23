@@ -3,3 +3,17 @@ body {
 	padding: 0;
 	font-family: sans-serif;
 }
+a {
+	text-decoration: none;
+}
+
+.category-list .selected {
+	background: #888888;
+	pointer-events: none;
+	cursor: default;
+}
+
+.category-link {
+	padding: 0 10px 0 10px;
+	text-transform: capitalize;
+}

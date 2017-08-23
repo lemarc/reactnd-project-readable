@@ -24,15 +24,14 @@ class PostsList extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const currentCategory = this.props.match.params.category
 		const { categories, posts } = this.props 
 		return (
-			<div>
-				<div>
-					<Link to='/' style={{padding: '20px', background: !currentCategory ? '#888888' : 'none'}}>All</Link>
+			<div className='posts-list'>
+				<div className='category-list'>
+					<Link to='/' className={`category-link ${!currentCategory && 'selected'}`}>All</Link>
 					{categories.map( (category,i) => (
-						<Link to={`/${category.path}`} key={i} style={{padding: '20px', background: currentCategory === category.path ? '#888888' : 'none'}}>
+						<Link to={`/${category.path}`} key={i} className={`category-link ${currentCategory === category.path && 'selected'}`}>
 							{category.name}
 						</Link>
 					))}
