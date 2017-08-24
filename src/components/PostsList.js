@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import { getPosts, getCategoryPosts } from '../actions'
 
+import PostPreview from './PostPreview'
+
 class PostsList extends Component {
 
 	componentDidMount() {
@@ -38,7 +40,7 @@ class PostsList extends Component {
 					
 				</div>
 				{posts.map( (post, i) => (
-					<div key={i}>{post.title}</div>
+					<PostPreview key={i} post={post} />
 				))}
 			</div>
 		)

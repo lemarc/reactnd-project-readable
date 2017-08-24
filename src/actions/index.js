@@ -1,8 +1,11 @@
 import * as ReadableAPI from '../utils/api.js'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
+export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const RECEIVE_COMMENTS_COUNT = 'RECEIVE_COMMENTS_COUNT'
+export const UPDATE_POST = 'UPDATE_POST'
 //export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR'
 
 
@@ -31,6 +34,32 @@ export const receiveComments = comments => ({
 	type: RECEIVE_COMMENTS,
 	comments
 })
+
+export const receiveCommentsCount = (id, count) => ({
+	type: RECEIVE_COMMENTS_COUNT,
+	id,
+	count
+})
+
+export const getComments = id => dispatch => ReadableAPI.getComments(id).then( comments => dispatch( receiveComments(comments) ) )
+
+export const getCommentsCount = id => dispatch => ReadableAPI.getComments(id).then( comments => {
+	dispatch( receiveCommentsCount( id, comments.length ) )
+})
+
+// receive a single post
+export const receivePost = post => ({
+	type: RECEIVE_POST,
+	post
+})
+
+export const updatePost = (id, post) => ({
+	type: UPDATE_POST,
+	id,
+	post
+})
+
+export const votePost = (id, option) => dispatch => ReadableAPI.votePost(id, option).then( post => dispatch( updatePost(id,post) ) )
 /*
 export function addRecipe( { recipe, day, meal} ) {
 	return {
