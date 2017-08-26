@@ -6,6 +6,7 @@ export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 export const RECEIVE_COMMENTS_COUNT = 'RECEIVE_COMMENTS_COUNT'
 export const UPDATE_POST = 'UPDATE_POST'
+export const SORT_POSTS = 'SORT_POSTS'
 //export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR'
 
 
@@ -60,6 +61,11 @@ export const updatePost = (id, post) => ({
 })
 
 export const votePost = (id, option) => dispatch => ReadableAPI.votePost(id, option).then( post => dispatch( updatePost(id,post) ) )
+
+export const sortPosts = sort => ({
+	type: SORT_POSTS,
+	sort
+})
 /*
 export function addRecipe( { recipe, day, meal} ) {
 	return {

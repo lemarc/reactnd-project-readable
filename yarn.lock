@@ -212,6 +212,10 @@ array-reduce@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/array-reduce/-/array-reduce-0.0.0.tgz#173899d3ffd1c7d9383e4479525dbe278cab5f2b"
 
+array-sort-by@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/array-sort-by/-/array-sort-by-1.1.2.tgz#d5d38cd54cac2a57584f62f52de7d2f855533249"
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"

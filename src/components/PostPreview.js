@@ -23,7 +23,7 @@ class PostPreview extends Component {
 					<button onClick={this.props.downVotePost}>downvote</button>
 					{voteScore}
 				</div>
-
+				<div>{this.props.count} comments</div>
 			</div>
 		)
 	}

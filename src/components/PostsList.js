@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import sortBy from 'array-sort-by'
 
-import { getPosts, getCategoryPosts } from '../actions'
+import { getPosts, getCategoryPosts, sortPosts } from '../actions'
 
 import PostPreview from './PostPreview'
 
@@ -27,7 +28,7 @@ class PostsList extends Component {
 
 	render() {
 		const currentCategory = this.props.match.params.category
-		const { categories, posts } = this.props 
+		const { categories, posts, sort, sortPosts } = this.props 
 		return (
 			<div className='posts-list'>
 				<div className='category-list'>
@@ -39,7 +40,20 @@ class PostsList extends Component {
 					))}
 					
 				</div>
-				{posts.map( (post, i) => (
+				<div>
+					Sort by:
+					<button onClick={()=>{ 
+						sortPosts( sort.by==='timestamp' ? {by: sort.by, order: -sort.order} : {by: 'timestamp', order: -1} )
+					}}>
+						Date
+					</button>
+					<button onClick={()=>{ 
+						sortPosts( sort.by==='voteScore' ? {by: sort.by, order: -sort.order} : {by: 'voteScore', order: -1} )
+					}}>
+						Score
+					</button>
+				</div>
+				{sortBy(posts, post=> sort.order * post[sort.by] ).map( (post, i) => (
 					<PostPreview key={i} post={post} />
 				))}
 			</div>
@@ -50,14 +64,16 @@ class PostsList extends Component {
 function mapStateToProps ({ categories, posts }) {
 	return {
 		categories: categories.categories,
-		posts: posts.posts
+		posts: posts.posts,
+		sort: posts.sort
 	}
 }
 
 function mapDispatchToProps (dispatch) {
 	return {
 		getPosts: () => dispatch(getPosts()),
-		getCategoryPosts: category => dispatch(getCategoryPosts(category))
+		getCategoryPosts: category => dispatch(getCategoryPosts(category)),
+		sortPosts: sort => dispatch(sortPosts(sort))
 	}
 }
 
