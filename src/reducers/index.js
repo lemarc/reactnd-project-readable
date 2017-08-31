@@ -6,7 +6,8 @@ import {
 	RECEIVE_COMMENTS_COUNT,
 	RECEIVE_POST,
 	UPDATE_POST,
-	SORT_POSTS
+	SORT_POSTS,
+	SORT_COMMENTS
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -57,7 +58,7 @@ function posts ( state = {posts:[], post: null, sort:{by: 'timestamp', order: -1
 	}
 }
 
-function comments ( state = {count:{}}, action ) {
+function comments ( state = { count:{}, messages:[], sort:{by: 'timestamp', order: -1} }, action ) {
 	switch ( action.type ) {
 		case RECEIVE_COMMENTS :
 			const { comments } = action
@@ -73,6 +74,12 @@ function comments ( state = {count:{}}, action ) {
 					...state.count,
 					[id]: count
 				}
+			}
+		case SORT_COMMENTS :
+			const { sort } = action
+			return {
+				...state,
+				sort
 			}
 		default :
 			return state
