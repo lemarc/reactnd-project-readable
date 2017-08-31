@@ -6,8 +6,12 @@ body {
 a {
 	text-decoration: none;
 }
+.app {
+	max-width: 960px;
+	margin: auto;
+}
 
-.category-list .selected {
+.category-nav .selected {
 	background: #888888;
 	pointer-events: none;
 	cursor: default;

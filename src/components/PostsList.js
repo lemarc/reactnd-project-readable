@@ -6,6 +6,7 @@ import sortBy from 'array-sort-by'
 import { getPosts, getCategoryPosts, sortPosts } from '../actions'
 
 import PostPreview from './PostPreview'
+import CategoryNav from './CategoryNav'
 
 class PostsList extends Component {
 
@@ -27,19 +28,12 @@ class PostsList extends Component {
 	}
 
 	render() {
-		const currentCategory = this.props.match.params.category
-		const { categories, posts, sort, sortPosts } = this.props 
+		const { posts, sort, sortPosts } = this.props
+
 		return (
-			<div className='posts-list'>
-				<div className='category-list'>
-					<Link to='/' className={`category-link ${!currentCategory && 'selected'}`}>All</Link>
-					{categories.map( (category,i) => (
-						<Link to={`/${category.path}`} key={i} className={`category-link ${currentCategory === category.path && 'selected'}`}>
-							{category.name}
-						</Link>
-					))}
-					
-				</div>
+			<div>
+				<CategoryNav currentCategory={this.props.match.params.category}/>
+
 				<div>
 					Sort by:
 					<button onClick={()=>{ 
@@ -53,17 +47,19 @@ class PostsList extends Component {
 						Score
 					</button>
 				</div>
-				{sortBy(posts, post=> sort.order * post[sort.by] ).map( (post, i) => (
-					<PostPreview key={i} post={post} />
-				))}
+
+				<div className='posts-list'>
+					{sortBy(posts, post=> sort.order * post[sort.by] ).map( (post, i) => (
+						<PostPreview key={i} post={post} />
+					))}
+				</div>
 			</div>
 		)
 	}
 }
 
-function mapStateToProps ({ categories, posts }) {
+function mapStateToProps ({ posts }) {
 	return {
-		categories: categories.categories,
 		posts: posts.posts,
 		sort: posts.sort
 	}
