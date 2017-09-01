@@ -11,6 +11,40 @@ a {
 	margin: auto;
 }
 
+.sort-options {
+	display: flex;
+}
+
+.sort-options button {
+	background: none;
+	border: none;
+	outline: none;
+	padding: 0 10px 0 10px;
+	margin: auto 0 auto 0;
+	display: flex;
+	width: 64px;
+	line-height: 16px;
+	font-size: 16px;
+}
+
+.sort-options img {
+	width: 16px;
+	height: 16px;
+}
+
+.vote-button {
+	background: none;
+	border: none;
+	outline: none;
+	padding: 0;
+	width: 24px;
+}
+
+.vote-box {
+	width: 24px;
+	text-align: center;
+}
+
 .category-nav .selected {
 	background: #888888;
 	pointer-events: none;

@@ -19,7 +19,7 @@ class CategoryNav extends Component {
 	}
 }
 
-function mapStateToProps ({ categories, posts }) {
+function mapStateToProps ({ categories }) {
 	return {
 		categories: categories.categories,
 	}

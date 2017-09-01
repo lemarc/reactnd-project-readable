@@ -8,6 +8,9 @@ import { getPosts, getCategoryPosts, sortPosts } from '../actions'
 import PostPreview from './PostPreview'
 import CategoryNav from './CategoryNav'
 
+import sortDesc from '../icons/sort-desc.svg'
+import sortAsc from '../icons/sort-asc.svg'
+
 class PostsList extends Component {
 
 	componentDidMount() {
@@ -34,17 +37,19 @@ class PostsList extends Component {
 			<div>
 				<CategoryNav currentCategory={this.props.match.params.category}/>
 
-				<div>
+				<div className='sort-options'>
 					Sort by:
 					<button onClick={()=>{ 
 						sortPosts( sort.by==='timestamp' ? {by: sort.by, order: -sort.order} : {by: 'timestamp', order: -1} )
 					}}>
 						Date
+						{ sort.by==='timestamp' && (sort.order === 1 ? <img src={sortAsc} alt='ascending'/> : <img src={sortDesc} alt='descending'/>) }
 					</button>
 					<button onClick={()=>{ 
 						sortPosts( sort.by==='voteScore' ? {by: sort.by, order: -sort.order} : {by: 'voteScore', order: -1} )
 					}}>
 						Score
+						{ sort.by==='voteScore' && (sort.order === 1 ? <img src={sortAsc} alt='ascending'/> : <img src={sortDesc} alt='descending'/>) }
 					</button>
 				</div>
 
