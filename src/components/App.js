@@ -5,6 +5,7 @@ import { getCategories } from '../actions'
 import { Route, withRouter } from 'react-router-dom'
 
 import PostsList from './PostsList'
+import PostDetail from './PostDetail'
 
 class App extends Component {
 	componentDidMount() {
@@ -15,7 +16,7 @@ class App extends Component {
 			<div className='app'>
 				<Route exact path='/' component={PostsList} />
 				<Route exact path='/:category' component={PostsList} />
-				<Route exact path='/:category/:id' />
+				<Route exact path='/:category/:id' component={PostDetail}/>
 			</div>
 		)
 	}

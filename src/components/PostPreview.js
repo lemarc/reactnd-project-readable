@@ -18,16 +18,16 @@ class PostPreview extends Component {
 		console.log(this.props)
 		const { title, author, voteScore, category, id } = this.props.post
 		return (
-			<div>
-				<div><Link to={`/${category}/${id}`}>{title}</Link></div>
-				<div>{author}</div>
-				
+			<div className='post'>
 				<div className='vote-box'>
-					<button className='vote-button' onClick={this.props.upVotePost}><img src={arrowUp} height='auto'/></button>
+					<button className='vote-button' onClick={this.props.upVotePost}><img src={arrowUp} alt='upvote'/></button>
 					<div className='vote-score'>{voteScore}</div>
-					<button className='vote-button' onClick={this.props.downVotePost}><img src={arrowDown} height='auto'/></button>
+					<button className='vote-button' onClick={this.props.downVotePost}><img src={arrowDown} alt='downvote'/></button>
 				</div>
-				<div>{this.props.count} comments</div>
+				<div className='post-title'><Link to={`/${category}/${id}`}>{title}</Link></div>
+				<div className='post-author'>{author}</div>
+				
+				<div className='post-comment-count'>{this.props.count} comments</div>
 			</div>
 		)
 	}

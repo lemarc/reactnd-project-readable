@@ -23,7 +23,7 @@ function categories ( state = {categories:[]}, action ) {
 	}
 }
 
-function posts ( state = {posts:[], post: null, sort:{by: 'timestamp', order: -1}}, action) {
+function posts ( state = {posts:[], post: {}, sort:{by: 'timestamp', order: -1}}, action) {
 	const { posts, post, id, sort } = action
 	switch ( action.type ) {
 		case RECEIVE_POSTS :
@@ -58,7 +58,7 @@ function posts ( state = {posts:[], post: null, sort:{by: 'timestamp', order: -1
 	}
 }
 
-function comments ( state = { count:{}, messages:[], sort:{by: 'timestamp', order: -1} }, action ) {
+function comments ( state = { comments:[], count:{}, sort:{by: 'timestamp', order: -1} }, action ) {
 	switch ( action.type ) {
 		case RECEIVE_COMMENTS :
 			const { comments } = action

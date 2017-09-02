@@ -54,6 +54,8 @@ export const receivePost = post => ({
 	post
 })
 
+export const getPost = id => dispatch => ReadableAPI.getPost(id).then( post => dispatch( receivePost(post) ) )
+
 export const updatePost = (id, post) => ({
 	type: UPDATE_POST,
 	id,
