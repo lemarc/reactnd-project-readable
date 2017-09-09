@@ -3,6 +3,9 @@ import { getPost, getComments, votePost } from '../actions'
 
 import { connect } from 'react-redux'
 
+import CategoryNav from './CategoryNav'
+import Comment from './Comment'
+
 import arrowUp from '../icons/arrow-up.svg'
 import arrowDown  from '../icons/arrow-down.svg'
 
@@ -13,6 +16,7 @@ class PostDetail extends Component {
 		this.props.getComments(id)
 	}
 	render() {
+		//console.log(this.props)
 
 		const { title, author, voteScore, body } = this.props.post
 
@@ -20,6 +24,8 @@ class PostDetail extends Component {
 
 		return (
 			<div>
+				<CategoryNav currentCategory={this.props.match.params.category}/>
+
 				<div className='post'>
 					<div className='vote-box'>
 						<button className='vote-button' onClick={this.props.upVotePost}><img src={arrowUp} alt='upvote'/></button>
@@ -31,8 +37,9 @@ class PostDetail extends Component {
 					<div className='post-body'>{body}</div>
 					<div className='post-comment-count'>{comments.length} comments</div>
 				</div>
-				<div className='comments'>
-					{comments.map( (comment,i) => <div key={i}>{comment.body}</div>)}
+				<h3>Comments</h3>
+				<div className='comments-list'>
+					{comments.map( (comment,i) => <Comment key={i} comment={comment}/> )}
 				</div>
 			</div>
 		)

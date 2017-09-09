@@ -46,8 +46,6 @@ a {
 
 .category-nav .selected {
 	background: #888888;
-	pointer-events: none;
-	cursor: default;
 }
 
 .category-link {
@@ -62,4 +60,9 @@ a {
 
 .vote-box {
 	float: left;
+}
+
+.comments-list {
+	display: flex;
+	flex-flow: column nowrap;
 }

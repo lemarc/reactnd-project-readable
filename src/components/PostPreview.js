@@ -15,7 +15,6 @@ class PostPreview extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const { title, author, voteScore, category, id } = this.props.post
 		return (
 			<div className='post'>
@@ -27,7 +26,7 @@ class PostPreview extends Component {
 				<div className='post-title'><Link to={`/${category}/${id}`}>{title}</Link></div>
 				<div className='post-author'>{author}</div>
 				
-				<div className='post-comment-count'>{this.props.count} comments</div>
+				<div className='post-comment-count'><Link to={`/${category}/${id}`}>{this.props.count} comments</Link></div>
 			</div>
 		)
 	}

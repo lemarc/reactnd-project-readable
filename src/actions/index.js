@@ -8,6 +8,7 @@ export const RECEIVE_COMMENTS_COUNT = 'RECEIVE_COMMENTS_COUNT'
 export const UPDATE_POST = 'UPDATE_POST'
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 
 
 
@@ -73,6 +74,15 @@ export const sortComments = sort => ({
 	type: SORT_COMMENTS,
 	sort
 })
+
+export const updateComment = (id, comment) => ({
+	type: UPDATE_COMMENT,
+	id,
+	comment
+})
+
+export const voteComment = (id, option) => dispatch => ReadableAPI.voteComment(id, option).then( comment => dispatch( updateComment(id,comment) ) )
+
 /*
 export function addRecipe( { recipe, day, meal} ) {
 	return {

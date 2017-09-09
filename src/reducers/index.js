@@ -7,7 +7,8 @@ import {
 	RECEIVE_POST,
 	UPDATE_POST,
 	SORT_POSTS,
-	SORT_COMMENTS
+	SORT_COMMENTS,
+	UPDATE_COMMENT
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -59,15 +60,14 @@ function posts ( state = {posts:[], post: {}, sort:{by: 'timestamp', order: -1}}
 }
 
 function comments ( state = { comments:[], count:{}, sort:{by: 'timestamp', order: -1} }, action ) {
+	const { comments, comment, id, count, sort} = action
 	switch ( action.type ) {
 		case RECEIVE_COMMENTS :
-			const { comments } = action
 			return {
 				...state,
 				comments
 			}
 		case RECEIVE_COMMENTS_COUNT :
-			const { id, count } = action
 			return {
 				...state,
 				count: {
@@ -76,10 +76,20 @@ function comments ( state = { comments:[], count:{}, sort:{by: 'timestamp', orde
 				}
 			}
 		case SORT_COMMENTS :
-			const { sort } = action
 			return {
 				...state,
 				sort
+			}
+		case UPDATE_COMMENT :
+			let commentsCopy = state.comments.slice() // shallow copy of comments
+			commentsCopy.forEach( (c,i) => {
+				if (c.id === id) {
+					commentsCopy[i] = comment // replace original with updated comment
+				}
+			})
+			return {
+				...state,
+				comments: commentsCopy,
 			}
 		default :
 			return state
