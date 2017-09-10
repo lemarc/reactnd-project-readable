@@ -6,9 +6,7 @@ import { getPosts, getCategoryPosts, sortPosts } from '../actions'
 
 import PostPreview from './PostPreview'
 import CategoryNav from './CategoryNav'
-
-import sortDesc from '../icons/sort-desc.svg'
-import sortAsc from '../icons/sort-asc.svg'
+import SortOptions from './SortOptions'
 
 class PostsList extends Component {
 
@@ -35,23 +33,7 @@ class PostsList extends Component {
 		return (
 			<div>
 				<CategoryNav currentCategory={this.props.match.params.category}/>
-
-				<div className='sort-options'>
-					Sort by:
-					<button onClick={()=>{ 
-						sortPosts( sort.by==='timestamp' ? {by: sort.by, order: -sort.order} : {by: 'timestamp', order: -1} )
-					}}>
-						Date
-						{ sort.by==='timestamp' && (sort.order === 1 ? <img src={sortAsc} alt='ascending'/> : <img src={sortDesc} alt='descending'/>) }
-					</button>
-					<button onClick={()=>{ 
-						sortPosts( sort.by==='voteScore' ? {by: sort.by, order: -sort.order} : {by: 'voteScore', order: -1} )
-					}}>
-						Score
-						{ sort.by==='voteScore' && (sort.order === 1 ? <img src={sortAsc} alt='ascending'/> : <img src={sortDesc} alt='descending'/>) }
-					</button>
-				</div>
-
+				<SortOptions sort={sort} sortItem={sortPosts}/>
 				<div className='posts-list'>
 					{sortBy(posts, post=> sort.order * post[sort.by] ).map( (post, i) => (
 						<PostPreview key={i} post={post} />

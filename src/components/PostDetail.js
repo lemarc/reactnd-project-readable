@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { getPost, getComments, votePost } from '../actions'
+import sortBy from 'array-sort-by'
+import { getPost, getComments, votePost, sortComments } from '../actions'
 
 import { connect } from 'react-redux'
 
@@ -8,6 +9,8 @@ import Comment from './Comment'
 
 import arrowUp from '../icons/arrow-up.svg'
 import arrowDown  from '../icons/arrow-down.svg'
+
+import SortOptions from './SortOptions'
 
 class PostDetail extends Component {
 	componentDidMount() {
@@ -20,7 +23,7 @@ class PostDetail extends Component {
 
 		const { title, author, voteScore, body } = this.props.post
 
-		const { comments } = this.props
+		const { comments, sort, sortComments } = this.props
 
 		return (
 			<div>
@@ -38,8 +41,9 @@ class PostDetail extends Component {
 					<div className='post-comment-count'>{comments.length} comments</div>
 				</div>
 				<h3>Comments</h3>
+				<SortOptions sort={sort} sortItem={sortComments}/>
 				<div className='comments-list'>
-					{comments.map( (comment,i) => <Comment key={i} comment={comment}/> )}
+					{sortBy(comments, comment => sort.order * comment[sort.by] ).map( (comment,i) => <Comment key={i} comment={comment}/> )}
 				</div>
 			</div>
 		)
@@ -60,7 +64,8 @@ function mapDispatchToProps (dispatch, ownProps) {
 		getPost: () => dispatch(getPost(id)),
 		getComments: () => dispatch(getComments(id)),
 		upVotePost: () => dispatch(votePost(id, 'upVote')),
-		downVotePost: () => dispatch(votePost(id, 'downVote'))
+		downVotePost: () => dispatch(votePost(id, 'downVote')),
+		sortComments: sort => dispatch(sortComments(sort))
 	}
 }
 
