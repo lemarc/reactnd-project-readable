@@ -7,10 +7,8 @@ import { connect } from 'react-redux'
 import CategoryNav from './CategoryNav'
 import Comment from './Comment'
 
-import arrowUp from '../icons/arrow-up.svg'
-import arrowDown  from '../icons/arrow-down.svg'
-
 import SortOptions from './SortOptions'
+import VoteBox from './VoteBox'
 
 class PostDetail extends Component {
 	componentDidMount() {
@@ -23,18 +21,14 @@ class PostDetail extends Component {
 
 		const { title, author, voteScore, body } = this.props.post
 
-		const { comments, sort, sortComments } = this.props
+		const { comments, sort, sortComments, upVotePost, downVotePost } = this.props
 
 		return (
 			<div>
 				<CategoryNav currentCategory={this.props.match.params.category}/>
 
 				<div className='post'>
-					<div className='vote-box'>
-						<button className='vote-button' onClick={this.props.upVotePost}><img src={arrowUp} alt='upvote'/></button>
-						<div className='vote-score'>{voteScore}</div>
-						<button className='vote-button' onClick={this.props.downVotePost}><img src={arrowDown} alt='downvote'/></button>
-					</div>
+					<VoteBox upVote={upVotePost} downVote={downVotePost} voteScore={voteScore} />
 					<div className='post-title'>{title}</div>
 					<div className='post-author'>{author}</div>
 					<div className='post-body'>{body}</div>

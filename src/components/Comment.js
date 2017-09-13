@@ -4,20 +4,16 @@ import { voteComment } from '../actions'
 
 import { connect } from 'react-redux'
 
-import arrowUp from '../icons/arrow-up.svg'
-import arrowDown  from '../icons/arrow-down.svg'
+import VoteBox from './VoteBox'
 
 class Comment extends Component {
 	
 	render() {
 		const { author, body, voteScore } = this.props.comment
+		const { upVoteComment, downVoteComment } = this.props
 		return (
 			<div className='comment'>
-				<div className='vote-box'>
-					<button className='vote-button' onClick={this.props.upVoteComment}><img src={arrowUp} alt='upvote'/></button>
-					<div className='vote-score'>{voteScore}</div>
-					<button className='vote-button' onClick={this.props.downVoteComment}><img src={arrowDown} alt='downvote'/></button>
-				</div>
+				<VoteBox upVote={upVoteComment} downVote={downVoteComment} voteScore={voteScore} />
 				<div className='comment-author'>{author}</div>
 				<div className='comment-body'>{body}</div>
 			</div>

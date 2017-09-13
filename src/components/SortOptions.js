@@ -25,24 +25,3 @@ export default class SortOptions extends Component {
 		)
 	}
 }
-/*
-function mapStateToProps ({ posts }) {
-	return {
-		posts: posts.posts,
-		sort: posts.sort
-	}
-}
-
-function mapDispatchToProps (dispatch) {
-	return {
-		getPosts: () => dispatch(getPosts()),
-		getCategoryPosts: category => dispatch(getCategoryPosts(category)),
-		sortPosts: sort => dispatch(sortPosts(sort))
-	}
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SortOptions)
-*/
