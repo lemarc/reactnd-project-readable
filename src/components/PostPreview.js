@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { getCommentsCount, votePost } from '../actions'
+import { getComments, votePost } from '../actions'
 
 import VoteBox from './VoteBox'
 
@@ -10,7 +10,7 @@ import VoteBox from './VoteBox'
 //Posts should have buttons or links for editing or deleting that post.
 class PostPreview extends Component {
 	componentDidMount() {
-		this.props.getCommentsCount()
+		this.props.getComments()
 	}
 
 	render() {
@@ -30,14 +30,14 @@ class PostPreview extends Component {
 
 function mapStateToProps ({ comments }, ownProps) {
 	return {
-		count: comments.count[ownProps.post.id] || 0
+		count: Object.keys(comments.byParentId[ownProps.post.id] || {}).length
 	}
 }
 
 function mapDispatchToProps (dispatch, ownProps) {
 	const { id } = ownProps.post
 	return {
-		getCommentsCount: () => dispatch(getCommentsCount(id)),
+		getComments: () => dispatch(getComments(id)),
 		upVotePost: () => dispatch(votePost(id, 'upVote')),
 		downVotePost: () => dispatch(votePost(id, 'downVote'))
 	}

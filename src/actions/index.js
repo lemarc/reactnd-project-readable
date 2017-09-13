@@ -4,7 +4,6 @@ export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
-export const RECEIVE_COMMENTS_COUNT = 'RECEIVE_COMMENTS_COUNT'
 export const UPDATE_POST = 'UPDATE_POST'
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
@@ -32,22 +31,13 @@ export const getCategoryPosts = category => dispatch => ReadableAPI.getCategoryP
 
 
 
-export const receiveComments = comments => ({
+export const receiveComments = (parentId, comments) => ({
 	type: RECEIVE_COMMENTS,
+	parentId,
 	comments
 })
 
-export const receiveCommentsCount = (id, count) => ({
-	type: RECEIVE_COMMENTS_COUNT,
-	id,
-	count
-})
-
-export const getComments = id => dispatch => ReadableAPI.getComments(id).then( comments => dispatch( receiveComments(comments) ) )
-
-export const getCommentsCount = id => dispatch => ReadableAPI.getComments(id).then( comments => {
-	dispatch( receiveCommentsCount( id, comments.length ) )
-})
+export const getComments = parentId => dispatch => ReadableAPI.getComments(parentId).then( comments => dispatch( receiveComments(parentId, comments) ) )
 
 // receive a single post
 export const receivePost = post => ({
@@ -57,13 +47,12 @@ export const receivePost = post => ({
 
 export const getPost = id => dispatch => ReadableAPI.getPost(id).then( post => dispatch( receivePost(post) ) )
 
-export const updatePost = (id, post) => ({
+export const updatePost = post => ({
 	type: UPDATE_POST,
-	id,
 	post
 })
 
-export const votePost = (id, option) => dispatch => ReadableAPI.votePost(id, option).then( post => dispatch( updatePost(id,post) ) )
+export const votePost = (id, option) => dispatch => ReadableAPI.votePost(id, option).then( post => dispatch( updatePost(post) ) )
 
 export const sortPosts = sort => ({
 	type: SORT_POSTS,

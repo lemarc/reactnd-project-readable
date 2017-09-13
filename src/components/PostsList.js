@@ -46,7 +46,7 @@ class PostsList extends Component {
 
 function mapStateToProps ({ posts }) {
 	return {
-		posts: posts.posts,
+		posts: Object.keys(posts.byId).map( id => posts.byId[id] ),
 		sort: posts.sort
 	}
 }

@@ -17,8 +17,6 @@ class PostDetail extends Component {
 		this.props.getComments(id)
 	}
 	render() {
-		//console.log(this.props)
-
 		const { title, author, voteScore, body } = this.props.post
 
 		const { comments, sort, sortComments, upVotePost, downVotePost } = this.props
@@ -44,10 +42,11 @@ class PostDetail extends Component {
 	}
 }
 
-function mapStateToProps ({posts, comments }) {
+function mapStateToProps ({posts, comments }, ownProps) {
+	const id = ownProps.match.params.id
 	return {
-		post: posts.post,
-		comments: comments.comments,
+		post: posts.byId[id] || {},
+		comments: comments.byParentId[id] ? Object.keys(comments.byParentId[id]).map( commentId => comments.byParentId[id][commentId] ) : [],
 		sort:comments.sort
 	}
 }
