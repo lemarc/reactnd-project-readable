@@ -1,3 +1,5 @@
+import uuid from './uuid'
+
 const api = process.env.REACT_APP_CONTACTS_API_URL || 'http://localhost:5001'
 
 const token = 'm7dqrf18'
@@ -135,14 +137,14 @@ body: String
 owner: String
 parentId: Should match a post id in the database.
 */
-export const createComment = ({id, timestamp, body, author, parentId}) =>
+export const createComment = ({body, author, parentId}) =>
 	fetch(`${api}/comments`, {
 		method: 'POST',
 		headers: {
 			...headers,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({id, timestamp, body, author, parentId}) // error if missing properties
+		body: JSON.stringify({id: uuid(), timestamp: Date.now(), body, author, parentId}) // error if missing properties
 	}).then(res => res.json()) // {id: "123456", timestamp: 1502824942815, body: "my comment body 2", author: "myself", parentId: "8xf0y6ziyjabvozdd253nd", …}
 
 /*

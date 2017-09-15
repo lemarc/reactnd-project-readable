@@ -66,3 +66,13 @@ a {
 	display: flex;
 	flex-flow: column nowrap;
 }
+
+.submit-comment {
+	font-size: 12px;
+}
+
+.submit-comment-author textarea {
+	resize: none;
+	border: none;
+	font-style: italic;
+}

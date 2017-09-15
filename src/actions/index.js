@@ -8,7 +8,7 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const SORT_POSTS = 'SORT_POSTS'
 export const SORT_COMMENTS = 'SORT_COMMENTS'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
-
+export const UPDATE_NEW_COMMENT = 'UPDATE_NEW_COMMENT'
 
 
 export const receiveCategories = categories => ({
@@ -64,14 +64,20 @@ export const sortComments = sort => ({
 	sort
 })
 
-export const updateComment = (id, comment) => ({
+export const updateComment = comment => ({
 	type: UPDATE_COMMENT,
-	id,
 	comment
 })
 
-export const voteComment = (id, option) => dispatch => ReadableAPI.voteComment(id, option).then( comment => dispatch( updateComment(id,comment) ) )
+export const voteComment = (id, option) => dispatch => ReadableAPI.voteComment(id, option).then( comment => dispatch( updateComment(comment) ) )
 
+
+export const updateNewComment = comment => ({
+	type: UPDATE_NEW_COMMENT,
+	comment
+})
+
+export const submitComment = comment => dispatch => ReadableAPI.createComment(comment).then( comment => dispatch( updateComment(comment)))
 /*
 export function addRecipe( { recipe, day, meal} ) {
 	return {

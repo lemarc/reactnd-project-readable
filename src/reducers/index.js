@@ -7,7 +7,8 @@ import {
 	UPDATE_POST,
 	SORT_POSTS,
 	SORT_COMMENTS,
-	UPDATE_COMMENT
+	UPDATE_COMMENT,
+	UPDATE_NEW_COMMENT
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -58,7 +59,7 @@ function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}}, action) {
 	}
 }
 
-function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1} }, action ) {
+function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1}, new: {author: '', body: ''}}, action ) {
 	const { comments, comment, parentId, sort} = action
 	switch ( action.type ) {
 		case RECEIVE_COMMENTS :
@@ -84,6 +85,11 @@ function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1} 
 						[comment.id]: comment
 					}
 				}
+			}
+		case UPDATE_NEW_COMMENT :
+			return {
+				...state,
+				new: comment
 			}
 		default :
 			return state

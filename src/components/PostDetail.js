@@ -9,6 +9,7 @@ import Comment from './Comment'
 
 import SortOptions from './SortOptions'
 import VoteBox from './VoteBox'
+import NewComment from './NewComment'
 
 class PostDetail extends Component {
 	componentDidMount() {
@@ -17,7 +18,7 @@ class PostDetail extends Component {
 		this.props.getComments(id)
 	}
 	render() {
-		const { title, author, voteScore, body } = this.props.post
+		const { title, author, voteScore, body, id } = this.props.post
 
 		const { comments, sort, sortComments, upVotePost, downVotePost } = this.props
 
@@ -34,6 +35,7 @@ class PostDetail extends Component {
 				</div>
 				<h3>Comments</h3>
 				<SortOptions sort={sort} sortItem={sortComments}/>
+				<NewComment parentId={id}/>
 				<div className='comments-list'>
 					{sortBy(comments, comment => sort.order * comment[sort.by] ).map( (comment,i) => <Comment key={i} comment={comment}/> )}
 				</div>
