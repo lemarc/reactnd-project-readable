@@ -8,7 +8,8 @@ import {
 	SORT_POSTS,
 	SORT_COMMENTS,
 	UPDATE_COMMENT,
-	UPDATE_NEW_COMMENT
+	UPDATE_NEW_COMMENT,
+	REMOVE_COMMENT
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -91,6 +92,18 @@ function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1},
 				...state,
 				new: comment
 			}
+		case REMOVE_COMMENT :
+			let copy = {
+				...state,
+				byParentId: {
+					...state.byParentId,
+					[comment.parentId]: {
+						...state.byParentId[comment.parentId]
+					}
+				}
+			}
+			delete copy.byParentId[comment.parentId][comment.id]
+			return copy
 		default :
 			return state
 	}

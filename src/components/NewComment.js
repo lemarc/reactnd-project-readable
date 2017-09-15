@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 class NewComment extends Component {
 	render() {
-		const { newComment, updateNewComment, parentId, submitComment } = this.props
+		const { newComment, updateNewComment, parentId, submitComment, clearNewComment } = this.props
 		console.log( this.props )
 		return (
 			<div className='submit-comment'>
@@ -16,8 +16,11 @@ class NewComment extends Component {
 				</div>
 				<textarea className='submit-comment-body' value={newComment.body} onChange={e=>updateNewComment({...newComment, body: e.target.value})}></textarea>
 				<div>
-					<button onClick={e=>submitComment( {...newComment, parentId } )}>Submit</button>
-					<button onClick={e=>updateNewComment({author:'',body:''})}>Cancel</button>
+					<button onClick={()=>{
+						submitComment( {...newComment, parentId } )
+						clearNewComment()
+					}}>Submit</button>
+					<button onClick={clearNewComment}>Cancel</button>
 				</div>
 			</div>
 		)
@@ -33,7 +36,8 @@ function mapStateToProps ({posts, comments }, ownProps) {
 function mapDispatchToProps (dispatch) {
 	return {
 		submitComment: comment => dispatch(submitComment(comment)),
-		updateNewComment: comment => dispatch(updateNewComment(comment))
+		updateNewComment: comment => dispatch(updateNewComment(comment)),
+		clearNewComment: () => dispatch(updateNewComment({author:'',body:''}))
 	}
 }
 
