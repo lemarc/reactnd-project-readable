@@ -69,10 +69,13 @@ a {
 
 .submit-comment {
 	font-size: 12px;
+	padding: 20px;
 }
 
-.submit-comment-author textarea {
-	resize: none;
-	border: none;
+.submit-comment-author input {
+	font-style: italic;
+}
+
+.comment-author {
 	font-style: italic;
 }

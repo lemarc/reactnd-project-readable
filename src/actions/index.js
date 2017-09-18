@@ -10,6 +10,7 @@ export const SORT_COMMENTS = 'SORT_COMMENTS'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const UPDATE_NEW_COMMENT = 'UPDATE_NEW_COMMENT'
 export const REMOVE_COMMENT = 'DELETE_COMMENT'
+export const EDIT_COMMENT = 'EDIT_COMMENT'
 
 
 export const receiveCategories = categories => ({
@@ -86,6 +87,13 @@ export const removeComment = comment => ({
 })
 
 export const deleteComment = comment => dispatch => ReadableAPI.deleteComment(comment.id).then( () => dispatch(removeComment(comment)))
+
+export const editComment = comment => ({
+	type: EDIT_COMMENT,
+	comment
+})
+
+export const saveEditComment = (id, comment) => dispatch => ReadableAPI.editComment(id,comment).then( comment => dispatch(updateComment(comment))).then( () => dispatch(editComment({})))
 /*
 export function addRecipe( { recipe, day, meal} ) {
 	return {

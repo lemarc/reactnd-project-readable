@@ -9,7 +9,8 @@ import {
 	SORT_COMMENTS,
 	UPDATE_COMMENT,
 	UPDATE_NEW_COMMENT,
-	REMOVE_COMMENT
+	REMOVE_COMMENT,
+	EDIT_COMMENT
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -60,7 +61,7 @@ function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}}, action) {
 	}
 }
 
-function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1}, new: {author: '', body: ''}}, action ) {
+function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1}, new: {author: '', body: ''}, editting: {} }, action ) {
 	const { comments, comment, parentId, sort} = action
 	switch ( action.type ) {
 		case RECEIVE_COMMENTS :
@@ -104,6 +105,11 @@ function comments ( state = { byParentId: {}, sort:{by: 'timestamp', order: -1},
 			}
 			delete copy.byParentId[comment.parentId][comment.id]
 			return copy
+		case EDIT_COMMENT :
+			return {
+				...state,
+				editting: comment
+			}
 		default :
 			return state
 	}

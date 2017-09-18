@@ -180,14 +180,14 @@ PARAMS:
 timestamp: timestamp. Get this however you want.
 body: String
 */
-export const editComment = (id, {timestamp, body}) =>
+export const editComment = (id, {body}) =>
 	fetch(`${api}/comments/${id}`, {
 		method: 'PUT',
 		headers: {
 			...headers,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({timestamp, body})
+		body: JSON.stringify({timestamp: Date.now(), body})
 	}).then(res => res.json()) // {id: #, timestamp: Date.now(), body: "new body", author: '', parentId: #, …}
 
 /*
