@@ -13,6 +13,7 @@ class App extends Component {
 		this.props.getCategories()
 	}
 	render() {
+		
 		return (
 			<div className='app'>
 				<Switch>

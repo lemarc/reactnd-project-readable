@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import sortBy from 'array-sort-by'
+import sortBy from 'sort-by'
 import { getPost, getComments, sortComments } from '../actions'
 
 import { connect } from 'react-redux'
@@ -30,7 +30,7 @@ class PostDetail extends Component {
 						<SortOptions sort={sort} sortItem={sortComments}/>
 						<NewComment parentId={post.id}/>
 						<div className='comments-list'>
-							{sortBy(comments, comment => sort.order * comment[sort.by] ).map( (comment,i) => <Comment key={i} comment={comment}/> )}
+							{comments.sort(sortBy((sort.order>0 ? sort.by :'-'+sort.by))).map( (comment,i) => <Comment key={i} comment={comment}/> )}
 						</div>
 					</div>
 					:

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import sortBy from 'array-sort-by'
+import sortBy from 'sort-by'
 
 import { getPosts, getCategoryPosts, sortPosts } from '../actions'
+
+import { Link } from 'react-router-dom'
 
 import PostPreview from './PostPreview'
 import CategoryNav from './CategoryNav'
@@ -23,22 +25,23 @@ class PostsList extends Component {
 	// Need to send post request on category change
 	componentWillReceiveProps(nextProps) {
 		const nextCategory = nextProps.match.params.category
-		if (!nextCategory) {
+		const currentCategory = this.props.match.params.category
+		if (!nextCategory && currentCategory) {
 			this.props.getPosts()
-		} else if ( nextCategory !== this.props.match.params.category) {
+		} else if ( nextCategory !== currentCategory) {
 			this.props.getCategoryPosts(nextCategory)
 		}
 	}
 
 	render() {
 		const { posts, sort, sortPosts } = this.props
-
 		return (
 			<div>
 				<CategoryNav currentCategory={this.props.match.params.category}/>
+				<Link to='/submit'><button>Submit new post</button></Link>
 				<SortOptions sort={sort} sortItem={sortPosts}/>
 				<div className='posts-list'>
-					{sortBy(posts, post=> sort.order * post[sort.by] ).map( (post, i) => (
+					{posts.sort(sortBy((sort.order>0 ? sort.by :'-'+sort.by))).map( (post, i) => (
 						<PostPreview key={i} post={post} />
 					))}
 				</div>
