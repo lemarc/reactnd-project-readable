@@ -50,14 +50,14 @@ body - String
 owner(author?) - String
 category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
 */
-export const createPost = ({id, timestamp, title, body, author, category}) =>
+export const createPost = ({title, body, author, category}, id) =>
 	fetch(`${api}/posts`, {
 		method: 'POST',
 		headers: {
 			...headers,
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({id, timestamp, category, title, body, author}) // will error if missing any properties
+		body: JSON.stringify({id, timestamp: Date.now(), category, title, body, author}) // will error if missing any properties
 	}).then(res => res.json()) // {id: #, timestamp: 1502828038971, title: "", body: "", author: "", …}
 
 /*

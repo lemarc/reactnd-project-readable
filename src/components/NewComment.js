@@ -31,7 +31,7 @@ class NewComment extends Component {
 	}
 }
 
-function mapStateToProps ({posts, comments }, ownProps) {
+function mapStateToProps ({ comments }, ownProps) {
 	return {
 		newComment: comments.new
 	}

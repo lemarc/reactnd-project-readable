@@ -8,6 +8,7 @@ import PostPreview from './PostPreview'
 import CategoryNav from './CategoryNav'
 import SortOptions from './SortOptions'
 
+
 class PostsList extends Component {
 
 	componentDidMount() {
@@ -22,7 +23,9 @@ class PostsList extends Component {
 	// Need to send post request on category change
 	componentWillReceiveProps(nextProps) {
 		const nextCategory = nextProps.match.params.category
-		if ( nextCategory !== this.props.match.params.category) {
+		if (!nextCategory) {
+			this.props.getPosts()
+		} else if ( nextCategory !== this.props.match.params.category) {
 			this.props.getCategoryPosts(nextCategory)
 		}
 	}

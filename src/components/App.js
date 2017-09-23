@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCategories } from '../actions'
 
-import { Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 
 import PostsList from './PostsList'
 import PostDetail from './PostDetail'
+import NewPost from './NewPost'
 
 class App extends Component {
 	componentDidMount() {
@@ -14,9 +15,12 @@ class App extends Component {
 	render() {
 		return (
 			<div className='app'>
-				<Route exact path='/' component={PostsList} />
-				<Route exact path='/:category' component={PostsList} />
-				<Route exact path='/:category/:id' component={PostDetail}/>
+				<Switch>
+					<Route exact path='/' component={PostsList} />
+					<Route exact path='/submit' component={NewPost}/>
+					<Route exact path='/:category' component={PostsList} />
+					<Route exact path='/:category/:id' component={PostDetail}/>
+				</Switch>
 			</div>
 		)
 	}

@@ -10,7 +10,10 @@ import {
 	UPDATE_COMMENT,
 	UPDATE_NEW_COMMENT,
 	REMOVE_COMMENT,
-	EDIT_COMMENT
+	EDIT_COMMENT,
+	EDIT_POST,
+	REMOVE_POST,
+	UPDATE_NEW_POST
 } from '../actions'
 
 function categories ( state = {categories:[]}, action ) {
@@ -26,13 +29,14 @@ function categories ( state = {categories:[]}, action ) {
 	}
 }
 
-function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}}, action) {
+function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}, new: {title:'',author:'', body:'',category:''}, editting:{} }, action) {
 	const { posts, post, sort } = action
 	switch ( action.type ) {
 		case RECEIVE_POSTS :
 			return {
 				...state,
-				byId: posts.reduce( (byId, post) => ( {...byId, [post.id]: post} ), {})
+				// getting all posts returns deleted posts, so only add the post to store if it is not deleted
+				byId: posts.reduce( (byId, post) => ( post.deleted ? byId : {...byId, [post.id]: post} ), {})
 			}
 		case RECEIVE_POST :
 			return {
@@ -55,6 +59,27 @@ function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}}, action) {
 			return {
 				...state,
 				sort
+			}
+		case EDIT_POST :
+			return {
+				...state,
+				editting: post
+			}
+		case REMOVE_POST :
+			let copy = {
+				...state,
+				byId: {
+					...state.byId,
+				}
+			}
+			delete copy.byId[post.id]
+			console.log('id', post.id)
+			console.log('copy',copy)
+			return copy
+		case UPDATE_NEW_POST :
+			return {
+				...state,
+				new: post
 			}
 		default :
 			return state
