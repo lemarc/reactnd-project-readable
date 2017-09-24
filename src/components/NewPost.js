@@ -10,9 +10,9 @@ import uuid from '../utils/uuid'
 
 class NewPost extends Component {
 	render() {
-		const { newPost, updateNewPost, categories, submitPost, history } = this.props
+		const { newPost, updateNewPost, categories, submitPost, clearNewPost, history } = this.props
 		const { author, title, body, category } = newPost
-		console.log(this.props)
+		console.log(!category)
 		return (
 			<div className='new-post'>
 				<CategoryNav currentCategory={category}/>
@@ -40,9 +40,14 @@ class NewPost extends Component {
 					<textarea className='' value={body} onChange={e=>updateNewPost({...newPost, body: e.target.value})}/>
 				</div>
 				<button onClick={e=>{
-					const id = uuid()
-					submitPost(newPost, id)
-					history.push(`/${newPost.category}/${id}`)
+					if (category) {
+						const id = uuid()
+						submitPost(newPost, id)
+						clearNewPost()
+						history.push(`/${newPost.category}/${id}`)
+					} else {
+						alert('Must select a category.')
+					}
 				}}>Submit</button>
 			</div>
 		)

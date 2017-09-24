@@ -13,6 +13,7 @@ a {
 
 .sort-options {
 	display: flex;
+	margin-top: 16px;
 }
 
 .sort-options button {
@@ -42,6 +43,10 @@ a {
 .vote-box {
 	width: 24px;
 	text-align: center;
+}
+
+.category-nav {
+	margin-bottom: 16px;
 }
 
 .category-nav .selected {
@@ -83,4 +88,8 @@ a {
 
 .comment-author {
 	font-style: italic;
+}
+
+.submit-post-button {
+	font-size: 16px;
 }

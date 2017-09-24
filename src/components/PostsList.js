@@ -38,7 +38,7 @@ class PostsList extends Component {
 		return (
 			<div>
 				<CategoryNav currentCategory={this.props.match.params.category}/>
-				<Link to='/submit'><button>Submit new post</button></Link>
+				<Link to='/submit'><button className='submit-post-button'>Submit new post</button></Link>
 				<SortOptions sort={sort} sortItem={sortPosts}/>
 				<div className='posts-list'>
 					{posts.sort(sortBy((sort.order>0 ? sort.by :'-'+sort.by))).map( (post, i) => (
