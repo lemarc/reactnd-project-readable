@@ -58,6 +58,11 @@ a {
 	text-transform: capitalize;
 }
 
+.posts-list {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
 .post {
 	width: 100%;
 	min-height: 74px;
