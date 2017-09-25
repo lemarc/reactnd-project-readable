@@ -68,8 +68,15 @@ a {
 	min-height: 74px;
 }
 
+.post-title {
+	width: 90%;
+}
 .post-author {
 	font-style: italic;
+}
+
+.post-body {
+	width: 90%;
 }
 
 .vote-box {

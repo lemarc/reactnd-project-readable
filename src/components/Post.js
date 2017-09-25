@@ -4,6 +4,10 @@ import { connect } from 'react-redux'
 import VoteBox from './VoteBox'
 
 class Post extends Component {
+	componentWillUnmount() {
+		// Cancel editting when navigating away from post
+		this.props.editPost({})
+	}
 	render() {
 		const { title, author, voteScore, body, id } = this.props.post
 		const { upVotePost, downVotePost, editPost, saveEditPost, post, editting, commentCount, deletePost } = this.props
