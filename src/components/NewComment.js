@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 class NewComment extends Component {
 
 	componentWillUnmount() {
-		//Clear out the new comment form when navigating from post detail
+		//Clear out the new comment form when navigating away
 		this.props.clearNewComment()
 	}
 	render() {

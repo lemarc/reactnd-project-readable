@@ -9,10 +9,14 @@ import CategoryNav from './CategoryNav'
 import uuid from '../utils/uuid'
 
 class NewPost extends Component {
+	componentWillUnmount() {
+		//Clear out the new post form when navigating away
+		this.props.clearNewPost()
+	}
 	render() {
 		const { newPost, updateNewPost, categories, submitPost, clearNewPost, history } = this.props
 		const { author, title, body, category } = newPost
-		console.log(!category)
+
 		return (
 			<div className='new-post'>
 				<CategoryNav currentCategory={category}/>

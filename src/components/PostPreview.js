@@ -6,8 +6,6 @@ import { getComments, votePost, editPost, deletePost } from '../actions'
 
 import VoteBox from './VoteBox'
 
-//Listed posts are displayed with title, author, number of comments, current score, and a voting mechanism to upvote or downvote the post.
-//Posts should have buttons or links for editing or deleting that post.
 class PostPreview extends Component {
 	componentDidMount() {
 		this.props.getComments()

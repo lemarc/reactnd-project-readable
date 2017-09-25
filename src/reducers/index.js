@@ -73,8 +73,6 @@ function posts ( state = {byId:{}, sort:{by: 'timestamp', order: -1}, new: {titl
 				}
 			}
 			delete copy.byId[post.id]
-			console.log('id', post.id)
-			console.log('copy',copy)
 			return copy
 		case UPDATE_NEW_POST :
 			return {
